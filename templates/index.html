@@ -1,28 +1,19 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-  <title>Expiry Dashboard</title>
-  <link rel="stylesheet" href="/static/style.css">
+    <title>Factory Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-  <h1>📊 Expiry Dashboard</h1>
-  <form method="POST" enctype="multipart/form-data">
-    <input type="file" name="file" required>
-    <button type="submit">Upload & Check</button>
-  </form>
-  {% if data %}
-    <table>
-      <thead><tr><th>Description</th><th>Valid To</th><th>Status</th></tr></thead>
-      <tbody>
-        {% for row in data %}
-          <tr class="{{ row['Status']|lower|replace(' ', '-') }}">
-            <td>{{ row['Description'] }}</td>
-            <td>{{ row['Valid To'] }}</td>
-            <td>{{ row['Status'] }}</td>
-          </tr>
+    <h1>Upload Excel File</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="submit">
+    </form>
+    {% if tables %}
+        {% for table in tables %}
+            {{ table|safe }}
         {% endfor %}
-      </tbody>
-    </table>
-  {% endif %}
+    {% endif %}
 </body>
 </html>

@@ -1,11 +1,5 @@
-body {
-  background: linear-gradient(to right, #dfe9f3, #ffffff);
-  font-family: Arial, sans-serif;
-  padding: 20px;
-}
+body { font-family: Arial, sans-serif; padding: 20px; background: #f8f8f8; }
 h1 { color: #333; }
-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-th, td { padding: 10px; border: 1px solid #ccc; text-align: left; }
-.valid { background-color: #d4edda; }
-.expiring-soon { background-color: #fff3cd; }
-.invalid-date { background-color: #f8d7da; }
+table.data { border-collapse: collapse; width: 100%; }
+table.data, table.data th, table.data td { border: 1px solid #ccc; }
+table.data th, table.data td { padding: 8px; text-align: left; }

@@ -1,18 +1,19 @@
-from flask import Flask, render_template
-import ssl
-import smtplib
+from flask import Flask, render_template, request
+import pandas as pd
+import os
 
 app = Flask(__name__)
 
-@app.route("/")
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    return "App is running with SSL verification disabled for internal SMTP."
+    if request.method == 'POST':
+        file = request.files['file']
+        if file and file.filename.endswith('.xlsx'):
+            df = pd.read_excel(file)
+            return render_template('index.html', tables=[df.to_html(classes='data')], titles=df.columns.values)
+        else:
+            return "Invalid file format. Please upload an Excel file."
+    return render_template('index.html')
 
-def send_email():
-    context = ssl._create_unverified_context()  # WARNING: Only for internal mail servers
-    with smtplib.SMTP_SSL("mail.rajsriya.com", 465, context=context) as server:
-        server.login("rajsriyahosur@rajsriya.com", "hsr@123")
-        server.sendmail("rajsriyahosur@rajsriya.com", "receiver@example.com", "Test Email")
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
