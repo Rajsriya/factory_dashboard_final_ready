@@ -72,7 +72,9 @@ def dashboard():
                     status = 'Invalid Date'
                 df.at[i, 'Status'] = status
                 if status in ['Expired', 'Expiring Soon']:
-                    alert_rows.append(row)
+                    row_copy = row.copy()
+                    row_copy['Status'] = status
+                    alert_rows.append(row_copy)
             data = df.to_dict(orient='records')
             send_email(pd.DataFrame(alert_rows))
     return render_template('dashboard.html', data=data)
