@@ -1,10 +1,14 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for, session
 import pandas as pd
 import smtplib, ssl
 from email.mime.text import MIMEText
 from datetime import datetime
 
 app = Flask(__name__)
+app.secret_key = 'rajsriya_secret'
+
+USERNAME = 'admin'
+PASSWORD = 'rajsriya123'
 
 SMTP_SERVER = "mail.rajsriya.com"
 SMTP_PORT = 465
@@ -31,11 +35,24 @@ def send_email(alert_rows):
         server.send_message(msg)
 
 @app.route('/', methods=['GET', 'POST'])
-def index():
+def login():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        if username == USERNAME and password == PASSWORD:
+            session['logged_in'] = True
+            return redirect(url_for('dashboard'))
+    return render_template('login.html')
+
+@app.route('/dashboard', methods=['GET', 'POST'])
+def dashboard():
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+
     data = []
     if request.method == 'POST':
         file = request.files['file']
-        if file.filename.endswith('.xlsx'):
+        if file and file.filename.endswith('.xlsx'):
             df = pd.read_excel(file)
             today = pd.Timestamp.now().normalize()
             alert_rows = []
@@ -57,6 +74,11 @@ def index():
             data = df.to_dict(orient='records')
             send_email(alert_rows)
     return render_template('index.html', data=data)
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('login'))
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
