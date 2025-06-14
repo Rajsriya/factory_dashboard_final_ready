@@ -1,1 +1,27 @@
-# dashboard.html placeholder content
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <h1>Upload Excel</h1>
+  <form method="POST" enctype="multipart/form-data">
+    <input type="file" name="file" required>
+    <button type="submit">Upload</button>
+  </form>
+  {% if data %}
+  <h2>Data Preview</h2>
+  <table>
+    <tr><th>Description</th><th>Valid To</th><th>Status</th></tr>
+    {% for row in data %}
+    <tr class="{{ row['Status'].replace(' ', '_') }}">
+      <td>{{ row['Description'] }}</td>
+      <td>{{ row['Valid To'] }}</td>
+      <td>{{ row['Status'] }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% endif %}
+</body>
+</html>

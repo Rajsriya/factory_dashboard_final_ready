@@ -1,1 +1,8 @@
-# styles.css placeholder content
+body { font-family: sans-serif; background: radial-gradient(circle, #eef2f3, #8e9eab); padding: 20px; }
+.login-box { background: white; padding: 20px; max-width: 300px; margin: auto; box-shadow: 0 0 10px rgba(0,0,0,0.2); }
+.login-box input, .login-box button { width: 100%; padding: 10px; margin: 10px 0; }
+table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; }
+th, td { border: 1px solid #ccc; padding: 10px; }
+.Valid { background-color: #d4edda; }
+.Expiring_Soon { background-color: #fff3cd; }
+.Expired { background-color: #f8d7da; }

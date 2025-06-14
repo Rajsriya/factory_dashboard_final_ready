@@ -1,1 +1,3 @@
-# requirements.txt placeholder content
+Flask
+pandas
+openpyxl
