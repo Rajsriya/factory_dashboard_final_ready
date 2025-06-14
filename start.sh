@@ -1,2 +1,1 @@
-#!/bin/bash
-python app.py
+# start.sh placeholder content

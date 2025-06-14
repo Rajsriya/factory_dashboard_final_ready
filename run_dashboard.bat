@@ -1,4 +1,1 @@
-@echo off
-cd /d %~dp0
-python app.py
-pause
+# run_dashboard.bat placeholder content
