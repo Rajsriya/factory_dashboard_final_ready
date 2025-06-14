@@ -1,0 +1,53 @@
+body {
+    font-family: Arial, sans-serif;
+    background: radial-gradient(circle, #f5f7fa, #c3cfe2);
+    margin: 40px;
+}
+
+h2 {
+    color: #333;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ccc;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #eee;
+}
+
+.Valid {
+    background-color: #d4edda;
+}
+
+.Expiring_Soon {
+    background-color: #fff3cd;
+}
+
+.Expired {
+    background-color: #f8d7da;
+}
+
+.Unknown {
+    background-color: #e2e3e5;
+}
+
+button {
+    padding: 8px 14px;
+    background-color: #0069d9;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
